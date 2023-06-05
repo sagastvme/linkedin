@@ -8,7 +8,15 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
+        if (auth()->user()) {
+            $post = new PostController();
+            return $post->index();
+
+        } else {
+            return view('auth.login');
+        }
+
+
     }
 
     public function store(Request $request)
@@ -21,7 +29,7 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ], $request->remember)) {
-           return  redirect()->route('feed.index');
+            return redirect()->route('feed.index');
         } else {
             return back()->with('errorMessage', 'Invalid credentials');
             dd('false');
