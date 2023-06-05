@@ -20,7 +20,7 @@ class LoginController extends Controller
         if (auth()->attempt([
             'email' => $request->email,
             'password' => $request->password
-        ])) {
+        ], $request->remember)) {
            return  redirect()->route('feed.index');
         } else {
             return back()->with('errorMessage', 'Invalid credentials');

@@ -18,6 +18,12 @@ Route::post('/register', [\App\Http\Controllers\RegisterController::class, 'stor
 
 
 Route::get('/feed', [\App\Http\Controllers\PostController::class, 'index'])->name('feed.index');
-Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
-Route::post('/login', [\App\Http\Controllers\LoginController::class, 'store']);
+Route::get('/feed/create', [\App\Http\Controllers\PostController::class, 'create'])->name('feed.create');
+Route::post('/feed/create', [\App\Http\Controllers\PostController::class, 'store'])->name('feed.store');
+
+Route::get('/', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
+Route::post('/', [\App\Http\Controllers\LoginController::class, 'store']);
+
 Route::post('/logout', [\App\Http\Controllers\LogoutController::class, 'store'])->name('logout');
+
+Route::get('/{user:username}', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');

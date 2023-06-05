@@ -93,7 +93,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
             </svg>
         </li>
-        <li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Contact</a></li>
+        @auth
+        <li><a class="text-sm text-gray-400 hover:text-gray-500" href="{{route('account', [auth()->user()->username])}}">My account</a></li>
+        @endauth
     </ul>
     @guest
     <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="{{route('login')}}">Sign In</a>
@@ -102,7 +104,7 @@
     @auth
         <form class="hidden lg:inline-block" action="{{route('logout')}}" method="POST">
             @csrf
-            <button  type="submit">Logout</button>
+            <button class="py-2 px-6  bg-[#b50033] hover:bg-red-600 text-sm text-white font-bold rounded-xl transition duration-200" type="submit">Logout</button>
         </form>
     @endauth
 </nav>
@@ -140,9 +142,11 @@
                 <li class="mb-1">
                     <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Pricing</a>
                 </li>
+                @auth
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Contact</a>
+                    <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="{{route('account', [auth()->user()->username])}}">My account</a>
                 </li>
+                @endauth
             </ul>
         </div>
         <div class="mt-auto">
@@ -152,13 +156,14 @@
                 <a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="{{route('register')}}">Sign Up</a>
                 @endguest
                 @auth
+
                         <form class="" action="{{route('logout')}}" method="POST">
                             @csrf
-                            <button  type="submit">Logout</button>
+                            <button class="block lg:ml-auto lg:mr-3 py-2 px-6   bg-[#b50033] hover:bg-red-600  text-sm text-white font-bold  rounded-xl transition duration-200" type="submit">Logout</button>
                         </form>
                 @endauth
             </div>
-            <p class="my-4 text-xs text-center text-gray-400">
+            <p class="my-4 text-xs  text-gray-400">
                 <span>Copyright © {{now()->year}}</span>
             </p>
         </div>

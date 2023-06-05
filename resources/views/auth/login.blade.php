@@ -30,6 +30,14 @@
                     @enderror
                     <input class="form-input" name="password"  type="password" placeholder="••••••••" required/>
                 </label>
+
+                <div class="flex flex-row gap-1">
+                    <input id="remember" class="form-input" name="remember"  type="checkbox"/>
+                    <label class="block  text-xs font-medium text-gray-700" for="remember">Remember me</label>
+                </div>
+
+
+
                 <!-- LinkedIn -->
 
                 <button type="submit"

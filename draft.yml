@@ -1,0 +1,5 @@
+models:
+  - table: users
+    class: 'App\Models\User'
+  - table: posts
+    class: 'App\Models\Post'
