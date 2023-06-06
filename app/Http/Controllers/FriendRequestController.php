@@ -22,4 +22,8 @@ class FriendRequestController extends Controller
 
     }
 
+    public function show(){
+      return view( 'friend_requests.requests');
+    }
+
 }

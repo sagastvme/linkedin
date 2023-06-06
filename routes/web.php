@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/friend_requests', [\App\Http\Controllers\FriendRequestController::class, 'show'])->name('show_friend_requests');
+
+
 Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'index'])->name('register');
 Route::post('/register', [\App\Http\Controllers\RegisterController::class, 'store'])->name('register.store');
 
@@ -27,4 +30,5 @@ Route::post('/', [\App\Http\Controllers\LoginController::class, 'store']);
 Route::post('/logout', [\App\Http\Controllers\LogoutController::class, 'store'])->name('logout');
 
 Route::get('/{user:username}', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');
+
 Route::post('/{user:username}', [\App\Http\Controllers\FriendRequestController::class, 'create'])->name('friend_request');
