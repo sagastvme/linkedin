@@ -40,9 +40,13 @@
                             <button class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
                                 Message
                             </button>
-                            <button class="text-white py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                Connect
-                            </button>
+                            <form method="post" action="">
+                                @csrf
+                                <button type="submit" class="text-white py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                                    Connect
+                                </button>
+                            </form>
+
                         @endauth
                     @endif
 

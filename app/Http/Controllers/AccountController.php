@@ -14,4 +14,7 @@ class AccountController extends Controller
           'user'=>$user, 'posts'=>$user->posts
       ]);
     }
+    public function create(){
+       
+    }
 }
