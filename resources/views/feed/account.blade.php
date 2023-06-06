@@ -29,6 +29,7 @@
 
 
                     @if(auth()->check() && auth()->user()->id == $user->id)
+                        {{--User is the logged user --}}
                         <a href="{{ route('feed.create') }}" class="flex-row justify-center mx-auto flex items-center text-white py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -36,16 +37,28 @@
                             New Post
                         </a>
                     @else
+                        {{--User is not the one logged in --}}
                         @auth
                             <button class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
                                 Message
+
                             </button>
-                            <form method="post" action="">
-                                @csrf
-                                <button type="submit" class="text-white py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                    Connect
-                                </button>
-                            </form>
+
+
+                                @if(session('success') ||    $is_request_sent==1 )
+                                    <button type="submit" class="text-white py-2 px-4 uppercase rounded bg-[#0077b5] shadow  font-medium transition transform ">
+                                        Friend request sent
+                                    </button>
+                                @else
+                                <form method="post" action="">
+                                    @csrf
+                                    <input type="hidden" name="friend_id" value="{{$user->id}}">
+                                    <button type="submit" class="text-white py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                                        Connect
+                                    </button>
+                                </form>
+                                @endif
+
 
                         @endauth
                     @endif
