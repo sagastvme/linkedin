@@ -39,7 +39,9 @@
 
                             Picture</label>
                         <div class="flex items-center space-x-2">
-                            <input type="file" name="picture" id="picture" class="hidden">
+                            <input type="file" name="picture" id="picture" accept="image/*" class="hidden">
+
+
                             @error('picture')
                             <p class="  form-input block mb-1 text-xs uppercase  border border-red-500 p-2 font-bold text-red-500">{{$message}}</p>
                             @enderror

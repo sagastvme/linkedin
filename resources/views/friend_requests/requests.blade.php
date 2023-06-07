@@ -81,7 +81,7 @@
                         <a href="{{route('feed.index')}}"
                                 class=" inline-flex items-center gap-2 rounded border-2 border-[#0077b5] bg-[#0077b5] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75"
 
-                             
+
                         >
                             Go back to read some posts
 
