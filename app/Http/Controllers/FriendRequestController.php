@@ -43,26 +43,36 @@ class FriendRequestController extends Controller
     public function store(Request $request)
     {
         $sender = User::where('username', $request->username)->first();
-//        $friend_request = Friend_request::where('sender_id', $sender->id)->first();
-//        $friend_request->delete();
 
-        $friend_request = Friend_request::where('sender_id', $sender->id)
-            ->where('receiver_id', auth()->user()->id)
-            ->first();
+        if($request->mode=='decline'){
+            $friend_request = Friend_request::where('sender_id', $sender->id)
+                ->where('receiver_id', auth()->user()->id)
+                ->delete();
+
+            return back()->with(['notification' => 'You have declined '. $sender->username . ' friend request']);
+
+        }else {
 
 
-        $they_arent_friends = $this->they_arent_friends($sender);
+            $friend_request = Friend_request::where('sender_id', $sender->id)
+                ->where('receiver_id', auth()->user()->id)
+                ->first();
 
 
-        if ($friend_request && $they_arent_friends) {
-            $friend_request->delete();
-            Friend::create(
-                [
-                    'user_id' => auth()->user()->id,
-                    'friend_id' => $sender->id
-                ]
-            );
+            $they_arent_friends = $this->they_arent_friends($sender);
 
+
+            if ($friend_request && $they_arent_friends) {
+                $friend_request->delete();
+                Friend::create(
+                    [
+                        'user_id' => auth()->user()->id,
+                        'friend_id' => $sender->id
+                    ]
+                );
+                return back()->with(['notification' => 'You are now friends with '. $sender->username]);
+
+            }
         }
 
 
