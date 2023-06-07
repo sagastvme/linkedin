@@ -75,7 +75,15 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
             </svg>
         </li>
-        <li><a class="text-sm text-gray-400 "  href="{{ route('show_friend_requests') }}">Friend Requests</a></li>
+        <li class="flex items-center gap-2">
+            <a class="text-sm text-gray-400" href="{{ route('show_friend_requests') }}">Friend Requests</a>
+          @if( auth()->user() && auth()->user()->friend_requests_received->count()>0)
+
+                <span class=" h-4 w-4 text-xs font-bold flex items-center justify-center text-white bg-red-500 rounded-full"> {{auth()->user()->friend_requests_received->count()}}</span>
+
+          @endif
+        </li>
+
         <li class="text-gray-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />

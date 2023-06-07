@@ -10,36 +10,29 @@
             <div class="mb-4">
                 <h1 class="font-semibold text-gray-800">Friend Requests</h1>
             </div>
-            <div class="flex justify-center items-center mb-8">
-                <div class="w-1/5">
-                    <img class="w-12 h-12 rounded-full border border-gray-100 shadow-sm" src="https://randomuser.me/api/portraits/men/20.jpg" alt="user image" />
-                </div>
-                <div class="w-4/5">
-                    <div>
-                        <span class="font-semibold text-gray-800">Ezio Dani</span>
-                        <span class="text-gray-400">wants to be your friend</span>
+       @foreach($requests_received as $friend_request)
+
+                <div class="flex justify-center items-center mb-8">
+                    <div class="w-1/5">
+                        <img class="w-12 h-12 rounded-full border border-gray-100 shadow-sm" src="https://randomuser.me/api/portraits/men/20.jpg" alt="user image" />
                     </div>
-                    <div class="font-semibold">
-                        <a href="" class="text-blue-600 mr-2">Accept</a>
-                        <a href="" class="text-gray-400">Decline</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center items-center">
-                <div class="w-1/5">
-                    <img class="w-12 h-12 rounded-full border border-gray-100 shadow-sm" src="https://randomuser.me/api/portraits/women/20.jpg" alt="user image" />
-                </div>
-                <div class="w-4/5">
-                    <div>
-                        <span class="font-semibold text-gray-800">Bianca Chen</span>
-                        <span class="text-gray-400">wants to be your friend</span>
-                    </div>
-                    <div class="font-semibold">
-                        <a href="" class="text-blue-600 mr-2">Accept</a>
-                        <a href="" class="text-gray-400">Decline</a>
+                    <div class="w-4/5">
+                        <div>
+                            <span class="font-semibold text-gray-800">{{$friend_request->username}}</span>
+                            <span class="text-gray-400">wants to be your friend</span>
+                        </div>
+                        <div class="font-semibold">
+                            <form action="{{route('show_friend_requests')}}" method="POST">
+                            @csrf
+                                <input type="hidden" name="username" value="{{$friend_request->username}}">
+                                <button type="submit" class="text-blue-600 mr-2">Accept</button>
+{{--                                <a href="" class="text-gray-400">Decline</a>--}}
+                            </form>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+       @endforeach
         </div>
     </div>
 @endsection

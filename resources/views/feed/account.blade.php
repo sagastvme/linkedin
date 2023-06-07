@@ -30,52 +30,64 @@
 
                     @if(auth()->check() && auth()->user()->id == $user->id)
                         {{--User is the logged user --}}
-                        <a href="{{ route('feed.create') }}" class="flex-row justify-center mx-auto flex items-center text-white py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        <a href="{{ route('feed.create') }}"
+                           class="flex-row justify-center mx-auto flex items-center text-white py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="w-4 h-4 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
                             </svg>
                             New Post
                         </a>
                     @else
                         {{--User is not the one logged in --}}
                         @auth
-                            <button class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                Message
-
-                            </button>
 
 
-                                @if(session('success') ||    $is_request_sent==1 )
-                                    <button type="submit" class="text-white py-2 px-4 uppercase rounded bg-[#0077b5] shadow  font-medium transition transform ">
-                                        Friend request sent
-                                    </button>
+
+                            @if(session('success') ||    $is_request_sent==1 )
+                                <button type="submit"
+                                        class="text-white py-2  mx-auto px-4 uppercase rounded bg-[#0077b5] shadow  font-medium transition transform ">
+                                    Friend request sent
+                                </button>
+                            @else
+                                @if(!$they_are_friends)
+
+                                    <form method="post" class="mx-auto" action="">
+                                        @csrf
+
+                                        <input type="hidden" name="friend_id" value="{{$user->id}}">
+                                        <button type="submit"
+                                                class="text-white   py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                                            Connect
+                                        </button>
+                                    </form>
                                 @else
-                                <form method="post" action="">
-                                    @csrf
-                                    <input type="hidden" name="friend_id" value="{{$user->id}}">
-                                    <button type="submit" class="text-white py-2 px-4 uppercase rounded bg-[#0077b5] hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                        Connect
+                                    <button class="  mx-auto
+ text-white py-2 px-4 uppercase rounded  bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                                        Message
                                     </button>
-                                </form>
                                 @endif
-
+                            @endif
 
                         @endauth
                     @endif
 
 
-
                 </div>
             </div>
-            <div class="mt-20 text-center border-b pb-12"><h1 class="text-4xl font-medium text-gray-700">{{$user->username}}
-                   </h1>
+            <div class="mt-20 text-center border-b pb-12"><h1
+                    class="text-4xl font-medium text-gray-700">{{$user->username}}
+                </h1>
                 <p class="font-light text-gray-600 mt-3">Bucharest, Romania</p>
                 <p class="mt-8 text-gray-500">Solution Manager - Creative Tim Officer</p>
                 <p class="mt-2 text-gray-500">University of Computer Science</p></div>
             <div class="flex items-center flex-col gap-8 justify-center mt-5 select-none">
                 @foreach($posts as $post)
-                    <a href="#" class="flex w-10/12 flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                        <img class="object-contain w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="{{asset('pictures').'/'. $post->cover}}" alt="">
+                    <a href="#"
+                       class="flex w-10/12 flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <img
+                            class="object-contain w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                            src="{{asset('pictures').'/'. $post->cover}}" alt="">
                         <div class="flex flex-col justify-between p-4 leading-normal">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$post->title}}</h5>
                             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{$post->user->username}}</p>
