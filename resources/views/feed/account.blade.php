@@ -8,7 +8,7 @@
         <div class="p-8 bg-white shadow mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
-                    <div><p class="font-bold text-gray-700 text-xl">22</p>
+                    <div><p class="font-bold text-gray-700 text-xl">{{$user->friends->count()}}</p>
                         <p class="text-gray-400">Friends</p></div>
                     <div><p class="font-bold text-gray-700 text-xl">{{count($posts)}}</p>
                         <p class="text-gray-400">Posts</p></div>
