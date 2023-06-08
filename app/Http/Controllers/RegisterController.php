@@ -22,6 +22,9 @@ class RegisterController extends Controller
             'username' => ['required', 'max:30', 'unique:users'],
             'email' => ['required', 'max:60', 'unique:users'],
             'password' => ['required', 'confirmed'],
+            'country' => ['required'],
+            'job' => ['required'],
+            'education' => ['required'],
             'picture' => ['required', 'image', 'mimes:jpeg,png,jpg,gif'],
         ]);
 
@@ -37,7 +40,10 @@ class RegisterController extends Controller
             'username' => Str::slug($request->username),
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'profile_picture' => $filename
+            'profile_picture' => $filename,
+            'country' => $request->country,
+            'job' => $request->job,
+            'education' => $request->education
         ]);
 
         auth()->attempt([

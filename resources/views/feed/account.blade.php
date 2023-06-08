@@ -231,11 +231,10 @@
                 </div>
             </div>
             <div class="mt-20 text-center border-b pb-12"><h1
-                    class="text-4xl font-medium text-gray-700">{{$user->username}}
-                </h1>
-                <p class="font-light text-gray-600 mt-3">Bucharest, Romania</p>
-                <p class="mt-8 text-gray-500">Solution Manager - Creative Tim Officer</p>
-                <p class="mt-2 text-gray-500">University of Computer Science</p></div>
+                    class="text-4xl font-medium text-gray-700">{{$user->username}}</h1>
+                <p class="font-light text-gray-600 mt-3">{{$user->country}}</p>
+                <p class="mt-8 text-gray-500">{{$user->job}}</p>
+                <p class="mt-2 text-gray-500">{{$user->education}}</p></div>
             <div class="flex items-center flex-col gap-8 justify-center mt-5 select-none">
                 @foreach($posts as $post)
                     <a href="#"
