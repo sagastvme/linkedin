@@ -40,7 +40,7 @@ class PostController extends Controller
 
             $croppedImage = \Intervention\Image\Facades\Image::make($image);
             $croppedImage->fit(1000, 1000, null);
-            $path = public_path('pictures') . '/' . $filename;
+            $path = public_path('post_pictures') . '/' . $filename;
             $croppedImage->save($path, 80);
         }
 

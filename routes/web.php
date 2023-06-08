@@ -30,6 +30,13 @@ Route::post('/', [\App\Http\Controllers\LoginController::class, 'store']);
 
 Route::post('/logout', [\App\Http\Controllers\LogoutController::class, 'store'])->name('logout');
 
-Route::get('/{user:username}', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');
 
+
+Route::get('/new_picture', [\App\Http\Controllers\ProfilePictureController::class, 'index'])->name('new_profile_picture.create');
+Route::post('/new_picture', [\App\Http\Controllers\ProfilePictureController::class, 'store'])->name('new_profile_picture.store');
+
+
+
+
+Route::get('/{user:username}', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');
 Route::post('/{user:username}', [\App\Http\Controllers\FriendRequestController::class, 'create'])->name('friend_request');
