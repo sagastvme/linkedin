@@ -67,28 +67,105 @@
         </div>
 
         {{--RIGHT SIDE--}}
-        <div class="  w-full md:w-1/2 bg-red-500 overflow-y-scroll ">
-            <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex flex-col ">
-                <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('profile_pictures'). '/' . $user->profile_picture}}"/>
-                <div>
-                    <div class="border-[#0077b5] bg-blue-100 border-2 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-                        <div class="font-semibold text-sm leading-relaxed">{{ $user->username }}</div>
-                        <div class="text-normal leading-snug md:leading-normal"
-                        >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque ipsa iste nobis non numquam pariatur quidem vero! Animi aperiam, expedita impedit laudantium molestias nobis nostrum optio reprehenderit tenetur voluptatum.</div>
-                    </div>
-                    <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
+        <div class="  w-full md:w-1/2  bg-red-500  ">
+            <!-- component -->
+            <div class="flex  flex-col bg-blue-500 overflow-y-scroll h-1/6  dark:bg-gray-800">
 
-                </div>
-                <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased  ">
+
+
+
+                <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
                     <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('profile_pictures'). '/' . $user->profile_picture}}"/>
+
                     <div>
-                        <div class="border-[#0077b5] bg-blue-100 border-2 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
                             <div class="font-semibold text-sm leading-relaxed">{{ $user->username }}</div>
                             <div class="text-normal leading-snug md:leading-normal"
-                            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque ipsa iste nobis non numquam pariatur quidem vero! Animi aperiam, expedita impedit laudantium molestias nobis nostrum optio reprehenderit tenetur voluptatum.</div>
+                            >{{$post->description}}</div>
                         </div>
                         <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
 
                     </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                    <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('profile_pictures'). '/' . $user->profile_picture}}"/>
+
+                    <div>
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                            <div class="font-semibold text-sm leading-relaxed">{{ $user->username }}</div>
+                            <div class="text-normal leading-snug md:leading-normal"
+                            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto asperiores cupiditate dolores earum facilis ipsa laborum, maxime officiis quae sapiente tempore temporibus voluptates. Aspernatur consequatur necessitatibus quam repellat veritatis?</div>
+                        </div>
+                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
+
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                    <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('profile_pictures'). '/' . $user->profile_picture}}"/>
+
+                    <div>
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                            <div class="font-semibold text-sm leading-relaxed">{{ $user->username }}</div>
+                            <div class="text-normal leading-snug md:leading-normal"
+                            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto asperiores cupiditate dolores earum facilis ipsa laborum, maxime officiis quae sapiente tempore temporibus voluptates. Aspernatur consequatur necessitatibus quam repellat veritatis?</div>
+                        </div>
+                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
+
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                    <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('profile_pictures'). '/' . $user->profile_picture}}"/>
+
+                    <div>
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                            <div class="font-semibold text-sm leading-relaxed">{{ $user->username }}</div>
+                            <div class="text-normal leading-snug md:leading-normal"
+                            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto asperiores cupiditate dolores earum facilis ipsa laborum, maxime officiis quae sapiente tempore temporibus voluptates. Aspernatur consequatur necessitatibus quam repellat veritatis?</div>
+                        </div>
+                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
+
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                    <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('profile_pictures'). '/' . $user->profile_picture}}"/>
+
+                    <div>
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                            <div class="font-semibold text-sm leading-relaxed">{{ $user->username }}</div>
+                            <div class="text-normal leading-snug md:leading-normal"
+                            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto asperiores cupiditate dolores earum facilis ipsa laborum, maxime officiis quae sapiente tempore temporibus voluptates. Aspernatur consequatur necessitatibus quam repellat veritatis?</div>
+                        </div>
+                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
+
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                    <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('profile_pictures'). '/' . $user->profile_picture}}"/>
+
+                    <div>
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                            <div class="font-semibold text-sm leading-relaxed">{{ $user->username }}</div>
+                            <div class="text-normal leading-snug md:leading-normal"
+                            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto asperiores cupiditate dolores earum facilis ipsa laborum, maxime officiis quae sapiente tempore temporibus voluptates. Aspernatur consequatur necessitatibus quam repellat veritatis?</div>
+                        </div>
+                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
+
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                    <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('profile_pictures'). '/' . $user->profile_picture}}"/>
+
+                    <div>
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                            <div class="font-semibold text-sm leading-relaxed">{{ $user->username }}</div>
+                            <div class="text-normal leading-snug md:leading-normal"
+                            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto asperiores cupiditate dolores earum facilis ipsa laborum, maxime officiis quae sapiente tempore temporibus voluptates. Aspernatur consequatur necessitatibus quam repellat veritatis?</div>
+                        </div>
+                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
 @endsection
