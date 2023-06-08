@@ -37,6 +37,9 @@ Route::post('/new_picture', [\App\Http\Controllers\ProfilePictureController::cla
 
 Route::get('/friends', [\App\Http\Controllers\FriendController::class, 'index'])->name('friends');
 
+Route::post('/delete_friend', [\App\Http\Controllers\FriendController::class, 'delete'])->name('friends.delete');
+
+
 
 Route::get('/{user:username}', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');
 Route::post('/{user:username}', [\App\Http\Controllers\FriendRequestController::class, 'create'])->name('friend_request');
