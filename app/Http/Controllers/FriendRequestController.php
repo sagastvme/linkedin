@@ -38,7 +38,7 @@ class FriendRequestController extends Controller
         $senderIds = $requests_received->pluck('sender_id');
 
 // Retrieve the users based on the sender IDs
-        $senders = User::whereIn('id', $senderIds)->get('username');
+        $senders = User::whereIn('id', $senderIds)->get();
 
 
         return view('friend_requests.requests', ['requests_received' => $senders]);

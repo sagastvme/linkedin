@@ -43,3 +43,6 @@ Route::post('/delete_friend', [\App\Http\Controllers\FriendController::class, 'd
 
 Route::get('/{user:username}', [\App\Http\Controllers\AccountController::class, 'index'])->name('account');
 Route::post('/{user:username}', [\App\Http\Controllers\FriendRequestController::class, 'create'])->name('friend_request');
+
+
+Route::get('/feed/posts/{user:username}/{post:title}', [\App\Http\Controllers\PostController::class, 'show'])->name('feed.show');

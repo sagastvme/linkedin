@@ -25,23 +25,26 @@
                 </div>
 
                 @foreach($requests_received as $friend_request)
-
                     <div class="flex justify-center items-center mb-8">
                         <div class="w-1/5">
                             <img class="w-12 h-12 rounded-full border border-gray-100 shadow-sm"
-                                 src="https://randomuser.me/api/portraits/men/20.jpg" alt="user image"/>
+                                 src="{{asset('profile_pictures').'/'.  $friend_request->profile_picture}}" alt="user image"/>
                         </div>
                         <div class="w-4/5">
                             <div>
                                 <span class="font-semibold text-gray-800">{{$friend_request->username}}</span>
-                                <span class="text-gray-400">wants to be your friend</span>
+                                <span class="text-gray-800">wants to be your friend</span>
                             </div>
                             <div class="font-semibold flex">
                                 <form action="{{route('show_friend_requests')}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="username" value="{{$friend_request->username}}">
                                     <input type="hidden" name="mode" value="accept">
-                                    <button type="submit" class="text-blue-600 mr-2">Accept</button>
+                                    <button type="submit" class="text-[#0077b5] mr-2">Accept</button>
+
+
+
+
                                 </form>
                                 <form action="{{route('show_friend_requests')}}" method="POST">
                                     @csrf
@@ -50,6 +53,7 @@
                                     <input type="hidden" name="mode" value="decline">
 
                                     <button type="submit" class="text-gray-400 mr-2">Decline</button>
+
                                 </form>
                             </div>
                         </div>

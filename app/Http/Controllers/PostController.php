@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Nette\Utils\Image;
@@ -11,7 +12,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
     }
 
     public function index()
@@ -56,6 +57,11 @@ class PostController extends Controller
         return redirect()->route('feed.index');
         // Handle the case where no image was uploaded
 
+    }
+
+    public function show(User $user, Post $post)
+    {
+return view('feed.specific_post', ['user'=>$user, 'post'=>$post]);
     }
 
 }
