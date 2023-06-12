@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/friend_requests', [\App\Http\Controllers\FriendRequestController::class, 'show'])->name('show_friend_requests');
 Route::post('/friend_requests', [\App\Http\Controllers\FriendRequestController::class, 'store']);
 
@@ -29,6 +28,14 @@ Route::get('/', [\App\Http\Controllers\LoginController::class, 'index'])->name('
 Route::post('/', [\App\Http\Controllers\LoginController::class, 'store']);
 
 Route::post('/logout', [\App\Http\Controllers\LogoutController::class, 'store'])->name('logout');
+
+Route::post('/like', [\App\Http\Controllers\LikeController::class, 'storeLike'])->name('like');
+Route::post('/dislike', [\App\Http\Controllers\LikeController::class, 'storeDislike'])->name('dislike');
+
+Route::post('/remove_like', [\App\Http\Controllers\LikeController::class, 'removeLike'])->name('remove_like');
+Route::post('/remove_dislike', [\App\Http\Controllers\LikeController::class, 'removeDislike'])->name('remove_dislike');
+
+
 
 
 

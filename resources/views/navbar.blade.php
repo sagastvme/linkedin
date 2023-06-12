@@ -60,7 +60,7 @@
 <body>
 {{--desktop menu--}}
 <nav class="relative px-4 py-4 flex justify-between items-center bg-white border border-gray-400 ">
-    <a class="text-3xl font-bold leading-none flex " ` href="#">
+    <a class="text-3xl font-bold  leading-none flex " ` href="#">
         <img src="/linkedin.svg" alt="Linkedin logo">
         <span class="items-center justify-center my-auto ml-2 text-2xl">Linkedin</span>
     </a>
@@ -83,7 +83,7 @@
                       d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
             </svg>
         </li>
-        <li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Messages</a></li>
+        <li><a class="text-sm bg- text-gray-400 hover:text-gray-500" href="#">Messages</a></li>
         <li class="text-gray-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
                  viewBox="0 0 24 24">
@@ -154,7 +154,7 @@
 
     <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
         <div class="flex items-center mb-8">
-            <a class="mr-auto text-3xl font-bold leading-none" href="#">
+            <a class="mr-auto text-3xl  font-bold leading-none" href="#">
                 <img src="/linkedin.svg" alt="Linkedin logo">
             </a>
             <button class="navbar-close">

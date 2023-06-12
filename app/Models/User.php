@@ -66,6 +66,21 @@ class User extends Authenticatable
         return $this->hasMany(Friend_request::class, 'receiver_id', 'id');
     }
 
-
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'user_id', 'id');
+    }
+    public function dislikes()
+    {
+        return $this->hasMany(Dislike::class, 'user_id', 'id');
+    }
+    public function has_liked( Post $post)
+    {
+        return $this->likes()->where('post_id', $post->id)->exists();
+    }
+    public function has_disliked( Post $post)
+    {
+        return $this->dislikes()->where('post_id', $post->id)->exists();
+    }
 
 }

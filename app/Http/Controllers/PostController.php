@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -61,7 +62,16 @@ class PostController extends Controller
 
     public function show(User $user, Post $post)
     {
-return view('feed.specific_post', ['user'=>$user, 'post'=>$post]);
+        $has_liked = auth()->user()->has_liked($post);
+        $has_disliked = auth()->user()->has_disliked($post);
+
+        return view('feed.specific_post', ['user' => $user, 'post' => $post, 'has_liked'=>$has_liked, 'has_disliked'=>$has_disliked]);
     }
 
-}
+//    private function has_liked(User $user, Post $post)
+//    {
+//        return auth()->user()->likes()->where('post_id', $post->id)->exists();
+//        }
+
+
+    }
