@@ -36,6 +36,9 @@ Route::post('/remove_like', [\App\Http\Controllers\LikeController::class, 'remov
 Route::post('/remove_dislike', [\App\Http\Controllers\LikeController::class, 'removeDislike'])->name('remove_dislike');
 
 
+Route::post('/comment/create', [\App\Http\Controllers\CommentController::class, 'store'])->name('comment');
+
+
 
 
 

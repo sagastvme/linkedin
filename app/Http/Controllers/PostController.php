@@ -62,9 +62,13 @@ class PostController extends Controller
 
     public function show(User $user, Post $post)
     {
-        $has_liked = auth()->user()->has_liked($post);
-        $has_disliked = auth()->user()->has_disliked($post);
-
+        if (auth()->user()) {
+            $has_liked = auth()->user()->has_liked($post);
+            $has_disliked = auth()->user()->has_disliked($post);
+        }else{
+            $has_liked = null;
+            $has_disliked = null;
+        }
         return view('feed.specific_post', ['user' => $user, 'post' => $post, 'has_liked'=>$has_liked, 'has_disliked'=>$has_disliked]);
     }
 
