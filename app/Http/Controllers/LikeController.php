@@ -23,10 +23,6 @@ class LikeController extends Controller
             if(auth()->user()->has_disliked($post)){
                 $this->removeDislike($request);
             }
-            $post->likes++;
-            $post->save();
-
-
             $like = new Like();
             $like->user_id = auth()->user()->id; // Assuming `user_id` is an integer column
             $like->post_id = $request->post_id;
@@ -39,11 +35,6 @@ class LikeController extends Controller
     {
         $post = Post::where('id', $request->post_id)->first();
         if (auth()->user()->has_liked($post)) {
-
-            $post->likes--;
-            $post->save();
-
-
             $like = Like::where('user_id', auth()->user()->id);
             $like->delete();
         }
@@ -56,11 +47,6 @@ class LikeController extends Controller
 
 
         if (auth()->user()->has_disliked($post)) {
-
-            $post->dislikes--;
-            $post->save();
-
-
             $like = Dislike::where('user_id', auth()->user()->id);
             $like->delete();
         }
@@ -75,10 +61,6 @@ class LikeController extends Controller
             if(auth()->user()->has_liked($post)){
                 $this->removeLike($request);
             }
-            $post->dislikes++;
-            $post->save();
-
-
             $dislike = new Dislike();
             $dislike->user_id = auth()->user()->id; // Assuming `user_id` is an integer column
             $dislike->post_id = $request->post_id;

@@ -24,6 +24,9 @@ Route::get('/feed', [\App\Http\Controllers\PostController::class, 'index'])->nam
 Route::get('/feed/create', [\App\Http\Controllers\PostController::class, 'create'])->name('feed.create');
 Route::post('/feed/create', [\App\Http\Controllers\PostController::class, 'store'])->name('feed.store');
 
+Route::post('/feed/{post:id}', [\App\Http\Controllers\PostController::class, 'destroy'])->name('feed.delete');
+
+
 Route::get('/', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('/', [\App\Http\Controllers\LoginController::class, 'store']);
 

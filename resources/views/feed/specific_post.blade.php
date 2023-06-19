@@ -2,6 +2,23 @@
 @section('title')
     {{$post->title}}
 @endsection
+@section('other_scripts')
+    <script>
+
+        function openModal() {
+            const modal = document.getElementById('defaultModal')
+            modal.showModal();
+        }
+
+
+        function closeModal() {
+            const modal = document.getElementById('defaultModal')
+            modal.close();
+        }
+
+
+    </script>
+@endsection
 
 @section('content')
     <div class="flex flex-col  md:flex-row h-screen">
@@ -26,8 +43,9 @@
 
                 <div class="w-full flex justify-center items-center gap-2 ">
                     @auth()
-                        <p>Likes <span class="font-bold">{{$post->likes}}</span></p>
-                        <p>Dislikes <span class="font-bold">{{$post->dislikes}}</span></p>
+
+                        <p>Likes <span class="font-bold">{{$post->likes()->count()}}</span></p>
+                        <p>Dislikes <span class="font-bold">{{$post->dislikes()->count()}}</span></p>
                         @if(!$has_liked)
                             {{--like button--}}
                             <form action="{{route('like')}}" class="w-fit" method="post">
@@ -145,10 +163,11 @@
                             </form>
 
                         @endif
+
                     @endauth
                     @guest
                         <a href="{{route('register')}}"
-                           class="text-center w-full  font-bold items-center gap-2 rounded border-2 border-[#0077b5] bg-[#0077b5] px-5 py-3  text-white transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75"
+                           class="text-center mt-5 w-full  font-bold items-center gap-2 rounded border-2 border-[#0077b5] bg-[#0077b5] px-5 py-3  text-white transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75"
 
 
                            rel="noreferrer"
@@ -162,39 +181,113 @@
         </div>
 
         <div class="w-full md:w-1/2  flex   flex-col">
-            <div class="h-1/6 flex-col justify-center flex items-center ">
+            <div class="md:h-1/6 my-2 md:my-0  flex-col justify-center flex items-center ">
                 @auth()
 
-                    <form action="{{route('comment')}}" method="post" class="flex flex-row  w-full px-5 ">
-                        @csrf
-                        <input type="hidden" name="post" value="{{$post->id}}">
+                    @if( auth()->user() != $post->user )
+                        <form action="{{route('comment')}}" method="post" class="flex flex-row  w-full px-5 ">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{$post->id}}">
 
-                        <input type="text" name="body" placeholder=" Write your comment here"
-                               class="w-full border border-gray-400 rounded-lg" id="">
-                        <button type="submit"
-                                class="ml-auto font-bold items-center gap-2 rounded border-2 border-[#0077b5] bg-[#0077b5] px-5 py-3  text-white transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75"
+                            <input type="text" name="body" placeholder=" Write your comment here"
+                                   class="w-full border border-gray-400 rounded-lg" id="">
+                            <button type="submit"
+                                    class="ml-auto font-bold items-center gap-2 rounded border-2 border-[#0077b5] bg-[#0077b5] px-5 py-3  text-white transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75"
 
-                                target="_blank"
-                                rel="noreferrer"
-                        >
-                            Comment
+                                    target="_blank"
+                                    rel="noreferrer"
+                            >
+                                Comment
 
-                        </button>
-                    </form>
-                    @error('body')
-                <div class=" w-full px-5 py-3">
-                    <p class="  px-5 py-3 text-xs uppercase  border border-red-500  font-bold text-red-500">{{$message}}</p>
+                            </button>
+                        </form>
+                        @error('body')
+                        <div class=" w-full px-5 py-3">
+                            <p class="  px-5 py-3 text-xs uppercase  border border-red-500  font-bold text-red-500">{{$message}}</p>
 
-                </div>
-                    @enderror
+                        </div>
+                        @enderror
+
+                    @else
+
+                            <button onclick="openModal()"
+                                class=" text-sm text-white font-bold font-bold rounded-xl py-1.5 px-5 gap-2 rounded border-2
+                 border-[#b50033] w-full bg-[#b50033] transition-colors hover:bg-transparent hover:text-[#b50033] focus:outline-none focus:ring active:opacity-75"
+                                type="submit">Delete post
+                            </button>
+
+
+
+                        <dialog id="defaultModal"
+                                class="w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400"
+                                role="alert">
+                            <div class="flex">
+                                <div
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="sr-only">Error icon</span>
+                                </div>
+                                <div class="ml-3 text-sm font-normal">
+                                    <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Remove friend</span>
+                                    <div class="mb-2 text-sm font-normal">Are you sure you want to delete this post? {{$post->title}}
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <button onclick="closeModal()"
+                                                    class="inline-flex justify-center w-full px-2 py-1.5 text-xs
+                           font-medium text-center text-white border-2 border-[#0077b5] bg-[#0077b5]
+rounded-lg
+                        transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75
+                         ">Cancel</button>
+
+
+
+
+
+                                        </div>
+                                        <div>
+                                            <form action="{{route('feed.delete', [$post])}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="friend_id" value="{{$user->id}}">
+                                                <button type="submit"
+                                                        class="
+                           inline-flex justify-center rounded-lg  w-full
+                           px-2 py-1.5 text-xs font-medium text-center text-white
+                 border-[#b50033] bg-[#b50033] transition-colors hover:bg-transparent border-2
+                  hover:text-[#b50033] hover: border-[#b50033] focus:outline-none focus:ring active:opacity-75"
+                                                >Delete</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="closeModal()" type="button"
+                                        class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                                        data-dismiss-target="#toast-interactive" aria-label="Close">
+                                    <span class="sr-only">Close</span>
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </dialog>
+                    @endif
 
                 @endauth
                 @guest()
-                    <div class="flex flex-row  w-full px-5 ">
+                    <div class="flex flex-row  w-full ">
 
                         <a href="{{route('register')}}"
-                           class="text-center w-full font-bold items-center gap-2 rounded border-2 border-[#0077b5] bg-[#0077b5] px-5 py-3  text-white transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75"
-
+                           {{--                           class="text-center  font-bold items-center rounded border-2 border-[#0077b5] bg-[#0077b5] text-white transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75"--}}
+                           class="text-center mt-5  font-bold items-center rounded border-2 border-[#0077b5] bg-[#0077b5] px-5 py-3 w-full  text-white transition-colors hover:bg-transparent hover:text-[#0077b5] focus:outline-none focus:ring active:opacity-75"
 
                            rel="noreferrer"
                         >
@@ -204,7 +297,9 @@
                     </div>
                 @endguest
             </div>
+
             <div class=" h-5/6 overflow-y-scroll">
+                {{--POST INFO--}}
                 <div class=" text-black dark:text-gray-200 p-4 antialiased flex">
                     <img class="rounded-full h-8 w-8 mr-2 mt-1 "
                          src="{{ asset('profile_pictures') .'/'. $user->profile_picture}}"/>
@@ -216,52 +311,30 @@
                         </div>
                         <div
                             class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400"> {{ $post->created_at->diffForHumans() }} </div>
-
                     </div>
                 </div>
 
 
-{{--COMENTARIOS--}}
-
-
-
-                <div class=" text-black dark:text-gray-200 p-4 antialiased flex">
-                    <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="https://picsum.photos/id/1027/200/200"/>
-                    <div>
-                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-                            <div class="font-semibold text-sm leading-relaxed">Jon Doe</div>
-                            <div class="text-normal leading-snug md:leading-normal"
-                            >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                est laborum.
+                {{--COMENTARIOS--}}
+                @foreach($comments as $comment)
+                    <div class="text-black dark:text-gray-200 p-4 antialiased flex">
+                        <img class="rounded-full h-8 w-8 mr-2 mt-1"
+                             src="{{ asset('profile_pictures') .'/'. $comment->user->profile_picture}}"/>
+                        <div>
+                            <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                                <div class="font-semibold text-sm leading-relaxed">{{$comment->user->username}}</div>
+                                <div
+                                    class="text-normal break-all leading-snug md:leading-normal overflow-x-auto max-w-full"
+                                >
+                                    {{$comment->body}}
+                                </div>
                             </div>
+                            <div
+                                class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">{{ $comment->created_at->diffForHumans() }}</div>
                         </div>
-                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
-
                     </div>
-                </div>
 
-                <div class=" text-black dark:text-gray-200 p-4 antialiased flex">
-                    <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="https://picsum.photos/id/1027/200/200"/>
-                    <div>
-                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-                            <div class="font-semibold text-sm leading-relaxed">Jon Doe</div>
-                            <div class="text-normal leading-snug md:leading-normal"
-                            >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                est laborum.
-                            </div>
-                        </div>
-                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
-
-                    </div>
-                </div>
+                @endforeach
 
 
             </div>

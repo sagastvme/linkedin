@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Friend;
 use App\Models\Friend_request;
+use App\Models\Like;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -13,22 +14,30 @@ class AccountController extends Controller
     public function index(User $user)
     {
 
-if(auth()->user()){
-    $friend_requests_sent = auth()->user()->friend_requests_sent;
-    $is_request_sent = $this->is_request_sent($friend_requests_sent, $user);
-    $they_are_friends = $this->check_if_friends($user);
-    return view('feed.account', [
-        'user' => $user, 'posts' => $user->posts,
-        'is_request_sent' => $is_request_sent,
-        'they_are_friends'=>$they_are_friends
-    ]);
-}else{
-    return view('feed.account', [
-        'user' => $user, 'posts' => $user->posts,
-        'is_request_sent' => null,
-        'they_are_friends'=>null
-    ]);
-}
+
+        $posts = $user->posts()->orderBy('created_at', 'desc')->paginate(5);
+        $post_total_count = $posts->total();
+        $total_likes = $user->posts()->withCount('likes')->get()->pluck('likes_count')->sum();
+
+
+        if (auth()->user()) {
+            $friend_requests_sent = auth()->user()->friend_requests_sent;
+            $is_request_sent = $this->is_request_sent($friend_requests_sent, $user);
+            $they_are_friends = $this->check_if_friends($user);
+            return view('feed.account', [
+                'user' => $user, 'posts' => $posts,
+                'is_request_sent' => $is_request_sent,
+                'they_are_friends' => $they_are_friends,
+                'post_total_count' => $post_total_count,
+                'total_likes'=>$total_likes
+            ]);
+        } else {
+            return view('feed.account', [
+                'user' => $user, 'posts' => $posts,
+                'is_request_sent' => null,
+                'they_are_friends' => null
+            ]);
+        }
 
 
     }
@@ -57,7 +66,6 @@ if(auth()->user()){
 
         if (!$first_check && !$second_check) {
             return false;
-
         } else {
             return true;
         }

@@ -27,12 +27,12 @@
         <div class="p-8 bg-white shadow mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
-                    <div><p class="font-bold text-gray-700 text-xl">{{$user->friends->count()}}</p>
+                    <div><p class="font-bold text-gray-700 text-xl">{{ Str::limit($user->friends->count(),3,'+')}}</p>
                         <p class="text-gray-400">Friends</p></div>
-                    <div><p class="font-bold text-gray-700 text-xl">{{count($posts)}}</p>
+                    <div><p class="font-bold text-gray-700 text-xl">{{Str::limit($post_total_count,3,'+')}}</p>
                         <p class="text-gray-400">Posts</p></div>
-                    <div><p class="font-bold text-gray-700 text-xl">89</p>
-                        <p class="text-gray-400">Comments</p></div>
+                    <div><p class="font-bold text-gray-700 text-xl"> {{ Str::limit($total_likes, 5,'+') }}</p>
+                        <p class="text-gray-400">Likes</p></div>
                 </div>
                 <div class="relative">
                     <div
@@ -237,7 +237,8 @@
                 <p class="mt-2 text-gray-500">{{$user->education}}</p></div>
             <div class="flex items-center flex-col gap-8 justify-center mt-5 select-none">
                 @foreach($posts as $post)
-                    <a href="#"
+                    <a href="{{route('feed.show',[$post->user, $post])}}"
+
                        class="flex w-10/12 flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                         <img
                             class="object-contain w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
@@ -245,11 +246,19 @@
                         <div class="flex flex-col justify-between p-4 leading-normal">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$post->title}}</h5>
                             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{$post->user->username}}</p>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{$post->description}}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                {{ Str::limit($post->description, 25) }}
+                            </p>
+
+
                         </div>
                     </a>
                 @endforeach
+                    <div class="mb-10">
+                        {{$posts->links('pagination::test')}}
+                    </div>
             </div>
+
 
 
         </div>

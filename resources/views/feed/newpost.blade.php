@@ -42,11 +42,12 @@
                             <input type="file" name="picture" id="picture" accept="image/*" class="hidden">
 
 
-                            @error('picture')
-                            <p class="  form-input block mb-1 text-xs uppercase  border border-red-500 p-2 font-bold text-red-500">{{$message}}</p>
-                            @enderror
+
 
                         </div>
+                        @error('picture')
+                        <p class=" mt-1 form-input block mb-1 text-xs uppercase  border border-red-500 p-2 font-bold text-red-500">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="col-span-full">
                         <button type="submit"
