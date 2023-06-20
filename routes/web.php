@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+Route::get('/conversation/{user:username}', [\App\Http\Controllers\ConversationController::class, 'index'])->name('conversation.index');
+
+
 Route::get('/friend_requests', [\App\Http\Controllers\FriendRequestController::class, 'show'])->name('show_friend_requests');
 Route::post('/friend_requests', [\App\Http\Controllers\FriendRequestController::class, 'store']);
 

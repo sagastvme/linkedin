@@ -87,13 +87,5 @@ class PostController extends Controller
             $post->delete();
         }
         return  redirect()->route('feed.index');
-
     }
-
-//    private function has_liked(User $user, Post $post)
-//    {
-//        return auth()->user()->likes()->where('post_id', $post->id)->exists();
-//        }
-
-
-    }
+}
