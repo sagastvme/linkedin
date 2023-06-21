@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -82,5 +83,14 @@ class User extends Authenticatable
     {
         return $this->dislikes()->where('post_id', $post->id)->exists();
     }
+    public function members()
+    {
+        return $this->hasMany(Member::class, 'user_id', 'id');
+    }
+    public function conversations(): BelongsToMany
+    {
+        return $this->belongsToMany(Conversation::class, 'members', 'user_id', 'conversation_id');
+    }
+
 
 }
