@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/conversation', [\App\Http\Controllers\ConversationController::class, 'show'])->name('conversation.show');
 
 Route::get('/conversation/{user:username}', [\App\Http\Controllers\ConversationController::class, 'index'])->name('conversation.index');
 Route::post('/conversation/{user:username}/{conversation:id}', [\App\Http\Controllers\ConversationController::class, 'store'])
     ->name('conversation.store');
+
+Route::post('/conversation/{user:username}', [\App\Http\Controllers\ConversationController::class, 'create'])
+    ->name('conversation.create');
+
+
 
 Route::get('/friend_requests', [\App\Http\Controllers\FriendRequestController::class, 'show'])->name('show_friend_requests');
 Route::post('/friend_requests', [\App\Http\Controllers\FriendRequestController::class, 'store']);

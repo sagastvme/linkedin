@@ -27,7 +27,7 @@
         <div class="p-8 bg-white shadow mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
-                    <div><p class="font-bold text-gray-700 text-xl">{{ Str::limit($user->friends->count(),3,'+')}}</p>
+                    <div><p class="font-bold text-gray-700 text-xl">{{ Str::limit($user->friend_two->count() + $user->friends->count(),3,'+')}}</p>
                         <p class="text-gray-400">Friends</p></div>
                     <div><p class="font-bold text-gray-700 text-xl">{{Str::limit($post_total_count,3,'+')}}</p>
                         <p class="text-gray-400">Posts</p></div>
@@ -157,8 +157,10 @@
                                     </form>
                                 @else
                                     <div class="flex flex-col md:flex-row text-center mx-auto gap-2">
-                                        <a href="{{ route('feed.create') }}"
-                                           class="mx-auto inline-flex items-center gap-2 rounded border-2 border-[#0077b5] bg-[#0077b5]
+                                        <form action="{{ route('conversation.create', ['user' => $user]) }}" class="" method="post">
+                                            @csrf
+                                        <button type="submit"
+                                           class="mx-auto h-full inline-flex items-center gap-2 rounded border-2 border-[#0077b5] bg-[#0077b5]
 
                                  text-white py-2 px-4 uppercase font-medium
 
@@ -194,7 +196,8 @@
 
                                             Message
 
-                                        </a>
+                                        </button>
+                                        </form>
                                         <button onclick="openModal()"
                                                 class="mx-auto inline-flex items-center gap-2 rounded border-2
 

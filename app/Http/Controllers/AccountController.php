@@ -35,7 +35,9 @@ class AccountController extends Controller
             return view('feed.account', [
                 'user' => $user, 'posts' => $posts,
                 'is_request_sent' => null,
-                'they_are_friends' => null
+                'they_are_friends' => null,
+                'post_total_count' => $post_total_count,
+                'total_likes'=>$total_likes
             ]);
         }
 

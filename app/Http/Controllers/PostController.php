@@ -59,7 +59,7 @@ class PostController extends Controller
             'title' => ucfirst(strtolower($request->title)),
             'description' => ucfirst(strtolower($request->description)),
             'cover' => $filename,
-            'likes' => 0,
+
             'user_id' => auth()->user()->id
         ]);
 

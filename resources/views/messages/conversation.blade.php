@@ -7,9 +7,9 @@
     <div class="h-screen  flex flex-col">
 
 
-        <a href="{{route('account', ['user'=>$user])}}" class="h-14 py-1 hover:underline flex flex-row mt-auto text-center">
-            <img  class="object-contain rounded-full pl-1 " src="{{asset('profile_pictures') . '/' . $user->profile_picture}}" alt="user profile picture">
-            <span class="pl-1 my-auto text-center">{{$user->username}}</span>
+        <a href="{{route('account', ['user'=>$user])}}" class="h-14 py-1 hover:underline  flex flex-row mt-auto text-center">
+            <img src="{{asset('profile_pictures') . '/' . $user->profile_picture}}" class="rounded-full w-32 object-contain  " alt="">
+            <p class="my-auto">{{$user->username}}</p>
         </a>
 
 

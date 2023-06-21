@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conversation;
+use App\Models\Member;
 use App\Models\User;
 use http\Message;
 use Illuminate\Http\Request;
@@ -17,14 +18,14 @@ class ConversationController extends Controller
     public function index(User $user)
     {
         if ($user->is(auth()->user())) {
-         abort(404);
+            abort(404);
         }
 
         $commonConversations = $user->members->pluck('conversation_id')
             ->intersect(auth()->user()->members->pluck('conversation_id'));
 
         if ($commonConversations->isEmpty()) {
-           abort(404);
+            abort(404);
         }
 
         $conversation = Conversation::find($commonConversations->first());
@@ -62,4 +63,66 @@ class ConversationController extends Controller
 
         }
     }
+
+    public function show()
+    {
+        return view('messages.general');
+    }
+
+
+    public function create(User $user)
+    {
+        $friends=  auth()->user()->friends;
+        $friends_two=  auth()->user()->friend_two;
+
+
+        $friendsId = $friends->pluck('friend_id');
+        $friendsIdTwo=$friends_two->pluck('user_id');
+
+        $friends = $friendsIdTwo->concat($friendsId);
+
+        $friends = User::whereIn('id', $friends)->get();
+
+
+
+        if ($friends->contains($user)) {
+
+            $commonConversations = $user->members->pluck('conversation_id')
+                ->intersect(auth()->user()->members->pluck('conversation_id'));
+
+            if ($commonConversations->isEmpty()) {
+                $new_conversation = new Conversation();
+                $new_conversation->save();
+
+                $new_member_one = new Member();
+                $new_member_two = new Member();
+
+
+                $new_member_one->conversation_id = $new_conversation->id;
+                $new_member_one->user_id=auth()->user()->id;
+                $new_member_one->save();
+
+
+                $new_member_two->conversation_id = $new_conversation->id;
+                $new_member_two->user_id=$user->id;
+                $new_member_two->save();
+
+                return redirect()->route('conversation.index', ['conversation' => $new_conversation, 'user' => $user]);
+
+
+            } else {
+                $conversation = Conversation::find($commonConversations->first());
+                return redirect()->route('conversation.index', ['conversation' => $conversation, 'user' => $user]);
+
+
+            }
+
+
+        } else {
+            return back();
+        }
+
+
+    }
+
 }

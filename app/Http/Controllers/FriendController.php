@@ -19,8 +19,15 @@ class FriendController extends Controller
 
 
         $friends=  auth()->user()->friends;
+        $friends_two=  auth()->user()->friend_two;
+
+
         $friendsId = $friends->pluck('friend_id');
-        $friends = User::whereIn('id', $friendsId)->get();
+        $friendsIdTwo=$friends_two->pluck('user_id');
+
+        $friends = $friendsIdTwo->concat($friendsId);
+
+        $friends = User::whereIn('id', $friends)->get();
 
 
         return view('friend.friends_list', [
